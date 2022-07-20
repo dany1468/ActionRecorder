@@ -335,7 +335,8 @@ class AR_OT_local_record(shared.id_based, Operator):
             if not len(reports):
                 self.clear()
                 return {"FINISHED"}
-            reports = numpy.array(functions.merge_report_tracked(reports, shared_data.tracked_actions), dtype= object)
+            # reports = numpy.array(functions.merge_report_tracked(reports, shared_data.tracked_actions), dtype= object)
+            reports = numpy.array(functions.merge_report_tracked(reports, []), dtype= object)
             shared_data.tracked_actions.clear()
             logger.info("Record Reports: %s", reports)
 

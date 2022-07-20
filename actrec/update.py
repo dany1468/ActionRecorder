@@ -52,7 +52,7 @@ def on_scene_update(dummy= None) -> None:
 def check_for_update(version_file: Optional[dict]) -> tuple[bool, Union[str, tuple[int, int, int]]]:
     if version_file is None:
         return (False, "No Internet Connection")
-    version = config.version
+    version = config.config["version"]
     download_version = tuple(version_file["version"])
     if download_version > version:
         return (True, download_version)
@@ -84,7 +84,7 @@ def update(AR, path, update_respond: Optional[requests.Response], download_chunk
                     update_respond.close()
                     update_manager.update_respond = None
         else:
-            update_manager.update_respond = requests.get(config.repo_source_url %path, stream= True)
+            update_manager.update_respond = requests.get(config.config["repoSource_URL"] %path, stream= True)
         AR.update_progress = 100 * (progress / (length * download_length) + (download_length - len(update_manager.download_list)) / download_length)
         if finished_downloaded:
             update_manager.download_list.pop(0)
@@ -116,7 +116,7 @@ def install_update(AR, download_chunks: dict, version_file: dict) -> None:
 
 def start_get_version_file() -> Optional[bool]:
     try:
-        update_manager.version_file['respond'] = requests.get(config.check_source_url, stream= True)
+        update_manager.version_file['respond'] = requests.get(config.config["checkSource_URL"], stream= True)
         update_manager.version_file['chunk'] = b''
         logger.info("Start Download: version_file")
         return True
@@ -163,7 +163,7 @@ def get_download_list(version_file) -> Optional[list]:
     if download_files is None:
         return None
     download_list = []
-    version = config.version
+    version = config.config["version"]
     for key in download_files:
         if tuple(download_files[key]) > version:
             download_list.append(key)
@@ -172,7 +172,7 @@ def get_download_list(version_file) -> Optional[list]:
 def no_stream_download_version_file(module_name):
     try:
         logger.info("Start Download: version_file")
-        res = requests.get(config.check_source_url)
+        res = requests.get(config.config["checkSource_URL"])
         logger.info("Finsihed Download: version_file")
         update_manager.version_file = json.loads(res.content)
         version_file = update_manager.version_file

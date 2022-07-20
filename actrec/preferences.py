@@ -132,7 +132,7 @@ class AR_preferences(AddonPreferences):
         row = col.row(align= True)
         row.prop(AR, 'prefernece_tab', expand= True)
         if AR.prefernece_tab == 'update':
-            col.operator('wm.url_open', text= "Release Notes").url = config.release_notes_url
+            col.operator('wm.url_open', text= "Release Notes").url = config.config["releasNotes_URL"]
             row = col.row()
             if AR.update:
                 update.draw_update_button(row, AR)
@@ -189,9 +189,9 @@ class AR_preferences(AddonPreferences):
             row.prop(self, 'local_create_empty')
             col.separator(factor= 1.5)
             row = col.row()
-            row.operator('wm.url_open', text= "Manual", icon= 'ASSET_MANAGER').url = config.manual_url
-            row.operator('wm.url_open', text= "Hint", icon= 'HELP').url = config.hint_url
-            row.operator('wm.url_open', text= "Bug Report", icon= 'URL').url = config.bug_report_url
+            row.operator('wm.url_open', text= "Manual", icon= 'ASSET_MANAGER').url = config.config["Manual_URL"]
+            row.operator('wm.url_open', text= "Hint", icon= 'HELP').url = config.config["Hint_URL"]
+            row.operator('wm.url_open', text= "Bug Report", icon= 'URL').url = config.config["BugReport_URL"]
 # endregion
 
 classes = [

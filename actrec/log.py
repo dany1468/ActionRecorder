@@ -46,7 +46,7 @@ class log_system:
         file_handler.setLevel(logger.level)
         file_handler.setFormatter(file_formatter)
         logger.addHandler(file_handler)
-        logger.info("Logging ActRec %s %s %s" %(".".join([str(x) for x in config.version]), "running on Blender", bpy.app.version_string))
+        logger.info("Logging ActRec %s %s %s" %(".".join([str(x) for x in config.config.items()]), "running on Blender", bpy.app.version_string))
         for log_text in loglater:
             logger.info(log_text)
         self.logger = logger

@@ -148,11 +148,11 @@ def panel_factory(space_type): #Create Panels for every spacetype with UI
         def draw(self, context):
             layout = self.layout
             AR = context.preferences.addons[__module__].preferences
-            layout.operator('wm.url_open', text= "Manual", icon= 'ASSET_MANAGER').url = config.manual_url
-            layout.operator('wm.url_open', text= "Hint", icon= 'HELP').url = config.hint_url
+            layout.operator('wm.url_open', text= "Manual", icon= 'ASSET_MANAGER').url = config.config["Manual_URL"]
+            layout.operator('wm.url_open', text= "Hint", icon= 'HELP').url = config.config["Hint_URL"]
             layout.operator('ar.preferences_open_explorer', text= "Open Log").path = log_sys.path
-            layout.operator('wm.url_open', text= "Bug Report", icon= 'URL').url = config.bug_report_url
-            layout.operator('wm.url_open', text= "Release Notes").url = config.release_notes_url
+            layout.operator('wm.url_open', text= "Bug Report", icon= 'URL').url = config.config["BugReport_URL"]
+            layout.operator('wm.url_open', text= "Release Notes").url = config.config["releasNotes_URL"]
             row = layout.row()
             if AR.update:
                 update.draw_update_button(row, AR)
